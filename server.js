@@ -4,13 +4,14 @@ const session = require("express-session");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const ShortUrl = require("./models/shortUrl");
-const app = express();
 
 // Config
 dotenv.config();
 const mongoURI = process.env.MONGO_URI;
 // const mongoURI = "mongodb://localhost:27017/urlshortener";
 connectDB(mongoURI);
+
+const app = express();
 
 // =======================================
 //                MIDDLEWARE
