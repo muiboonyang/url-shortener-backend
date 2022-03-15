@@ -1,6 +1,6 @@
 const connectDB = require("./models/db");
 const express = require("express");
-// const session = require("express-session");
+const session = require("express-session");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const ShortUrl = require("./models/shortUrl");
@@ -22,12 +22,20 @@ app.use(express.json()); // allows res.body to work (express.json lets you read 
 app.use(express.urlencoded({ extended: false })); // allows you to read what the forms send over (by default, it's all encoded), just declare it
 app.use(express.static("public")); // allow loading of static files in "public" directory
 
+// session middleware
+app.use(
+  session({
+    secret: "urlshortener",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 // =======================================
 //              ROUTES
 // =======================================
 
 app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: false }));
 
 app.get("/", async (req, res) => {
   const shortUrls = await ShortUrl.find();
@@ -57,57 +65,6 @@ app.get("/:shortUrl", async (req, res) => {
 app.listen(process.env.PORT || 5001);
 
 /////////////////////////////////////////////////////////
-
-// // =======================================
-// //              DEPENDENCIES
-// // =======================================
-
-// // Dependencies
-// const connectDB = require("./models/db");
-// const express = require("express");
-// const session = require("express-session");
-// const cors = require("cors");
-// const bcrypt = require("bcrypt");
-// const multer = require("multer");
-// const dotenv = require("dotenv");
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "./uploads");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.originalname);
-//   },
-// });
-// const upload = multer({ storage });
-
-// // Config
-// dotenv.config();
-// const mongoURI = process.env.MONGO_URI;
-// // const mongoURI = "mongodb://localhost:27017/project3";
-// connectDB(mongoURI);
-
-// const app = express();
-
-// // =======================================
-// //                MIDDLEWARE
-// // =======================================
-
-// // body parser middleware
-// app.use(cors()); // overcomes cors issue
-// app.use(express.json()); // allows res.body to work (express.json lets you read the req.body in json)
-// app.use(express.urlencoded({ extended: false })); // allows you to read what the forms send over (by default, it's all encoded), just declare it
-// app.use(express.static("public")); // allow loading of static files in "public" directory
-// app.use("/uploads", express.static("uploads"));
-
-// // session middleware
-// app.use(
-//   session({
-//     secret: "project3",
-//     resave: false,
-//     saveUninitialized: false,
-//   })
-// );
 
 // // =======================================
 // //                CONTROLLERS
@@ -237,9 +194,3 @@ app.listen(process.env.PORT || 5001);
 //   await TaskModel.findByIdAndUpdate(req.body.id, { review: req.body.review });
 //   res.json("Updated review!");
 // });
-
-// // =======================================
-// //              LISTENER
-// // =======================================
-
-// app.listen(process.env.PORT || 5001);
