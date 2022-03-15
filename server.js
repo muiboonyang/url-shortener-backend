@@ -2,12 +2,25 @@ const connectDB = require("./models/db");
 const express = require("express");
 // const session = require("express-session");
 const cors = require("cors");
+const dotenv = require("dotenv");
 const ShortUrl = require("./models/shortUrl");
 const app = express();
 
 // Config
-const mongoURI = "mongodb://localhost:27017/urlshortener";
+dotenv.config();
+const mongoURI = process.env.MONGO_URI;
+// const mongoURI = "mongodb://localhost:27017/urlshortener";
 connectDB(mongoURI);
+
+// =======================================
+//                MIDDLEWARE
+// =======================================
+
+// body parser middleware
+app.use(cors()); // overcomes cors issue
+app.use(express.json()); // allows res.body to work (express.json lets you read the req.body in json)
+app.use(express.urlencoded({ extended: false })); // allows you to read what the forms send over (by default, it's all encoded), just declare it
+app.use(express.static("public")); // allow loading of static files in "public" directory
 
 // =======================================
 //              ROUTES
