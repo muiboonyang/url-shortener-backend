@@ -7,7 +7,6 @@ const express = require("express");
 const session = require("express-session");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const ShortUrl = require("./models/shortUrl");
 
 // Config
 dotenv.config();
@@ -37,24 +36,30 @@ app.use(
 );
 
 // =======================================
+//              DATABASE (MODELS)
+// =======================================
+
+const UrlModel = require("./models/urlShortener");
+
+// =======================================
 //              ROUTES
 // =======================================
 
 app.set("view engine", "ejs");
 
 app.get("/", async (req, res) => {
-  const shortUrls = await ShortUrl.find();
+  const shortUrls = await UrlModel.find();
   res.render("index", { shortUrls: shortUrls });
 });
 
 app.post("/shortUrls", async (req, res) => {
-  await ShortUrl.create({ full: req.body.fullUrl });
+  await UrlModel.create({ full: req.body.fullUrl });
 
   res.redirect("/");
 });
 
 app.get("/:shortUrl", async (req, res) => {
-  const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl });
+  const shortUrl = await UrlModel.findOne({ short: req.params.shortUrl });
   if (shortUrl == null) return res.sendStatus(404);
 
   shortUrl.clicks++;
