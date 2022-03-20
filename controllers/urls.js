@@ -20,8 +20,10 @@ const UrlModel = require("../models/urls.js");
 // });
 
 router.get("/", async (req, res) => {
-  const shortUrls = await UrlModel.find();
-  res.render("index", { shortUrls: shortUrls });
+  const shortUrls = await UrlModel.find({});
+  res.json(shortUrls);
+  //   const shortUrls = await UrlModel.find();
+  //   res.render("index", { shortUrls: shortUrls });
 });
 
 //======================
@@ -49,7 +51,7 @@ router.get("/:shortUrl", async (req, res) => {
 
 router.post("/shortUrls", async (req, res) => {
   await UrlModel.create({ full: req.body.fullUrl });
-  res.redirect("/");
+  res.redirect("/myurls");
 });
 
 // router.post("/new", async (req, res) => {
