@@ -7,6 +7,7 @@ const express = require("express");
 const session = require("express-session");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const bcrypt = require("bcrypt");
 
 // Config
 dotenv.config();
