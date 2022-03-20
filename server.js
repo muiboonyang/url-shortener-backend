@@ -52,7 +52,9 @@ app.use("/sessions", sessionController);
 //              DATABASE (MODELS)
 // =======================================
 
-const ShortUrl = require("./models/shortUrl");
+const UrlModel = require("./models/urls.js");
+const UserModel = require("./models/users.js");
+
 const userSeed = require("./models/seed-users.js");
 
 // =======================================
