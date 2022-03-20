@@ -20,7 +20,7 @@ const UrlModel = require("../models/urls.js");
 // });
 
 router.get("/", async (req, res) => {
-  const shortUrls = await UrlModel.find({});
+  const shortUrls = await UrlModel.find({ username: req.params.username });
   res.json(shortUrls);
   //   const shortUrls = await UrlModel.find();
   //   res.render("index", { shortUrls: shortUrls });
