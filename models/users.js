@@ -10,8 +10,7 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     name: { type: String, required: true },
   },
-  { timestamps: true },
-  { collection: "users" }
+  { timestamps: true, collection: "users" }
 );
 
 const UserModel = mongoose.model("UserModel", UserSchema);
