@@ -37,7 +37,6 @@ router.post("/shortUrls", async (req, res) => {
     username: req.body.username,
     full: req.body.url,
   });
-  res.redirect("/urls/");
 });
 
 //======================

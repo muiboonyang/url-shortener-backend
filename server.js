@@ -120,7 +120,7 @@ app.post("/delete/:id", async (req, res) => {
     res.json(`All users deleted successfuly!`);
     return;
   }
-  await UrlModel.deleteOne({ _id: req.params.id });
+  await UrlModel.deleteOne({ short: req.params.id });
   res.json(`Url deleted successfully!`);
 });
 
