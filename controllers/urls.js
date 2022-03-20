@@ -20,7 +20,7 @@ const UrlModel = require("../models/shortUrl");
 // });
 
 router.get("/", async (req, res) => {
-  const shortUrls = await ShortUrl.find();
+  const shortUrls = await UrlModel.find();
   res.render("index", { shortUrls: shortUrls });
 });
 
@@ -34,7 +34,7 @@ router.get("/", async (req, res) => {
 // });
 
 router.get("/:shortUrl", async (req, res) => {
-  const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl });
+  const shortUrl = await UrlModel.findOne({ short: req.params.shortUrl });
   if (shortUrl == null) return res.sendStatus(404);
 
   shortUrl.clicks++;
@@ -48,7 +48,7 @@ router.get("/:shortUrl", async (req, res) => {
 //=======================
 
 router.post("/shortUrls", async (req, res) => {
-  await ShortUrl.create({ full: req.body.fullUrl });
+  await UrlModel.create({ full: req.body.fullUrl });
   res.redirect("/");
 });
 
@@ -80,17 +80,17 @@ router.post("/shortUrls", async (req, res) => {
 // UPDATE
 //======================
 
-router.post("/:username/update", async (req, res) => {
-  const formInput = req.body;
-  const password = req.body.password;
-  const hashPassword = await bcrypt.hash(password, 12);
+// router.post("/:username/update", async (req, res) => {
+//   const formInput = req.body;
+//   const password = req.body.password;
+//   const hashPassword = await bcrypt.hash(password, 12);
 
-  await UserModel.findOneAndUpdate(
-    { username: req.params.username },
-    { ...formInput, password: hashPassword }
-  );
-  res.json(`Profile updated successfully!`);
-});
+//   await UserModel.findOneAndUpdate(
+//     { username: req.params.username },
+//     { ...formInput, password: hashPassword }
+//   );
+//   res.json(`Profile updated successfully!`);
+// });
 
 //======================
 // EXPORT
