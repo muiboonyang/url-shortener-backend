@@ -72,7 +72,7 @@ const userSeed = require("./models/seed-users.js");
 // CREATE - Seed data
 //======================
 
-app.get("/seeduser", async (req, res) => {
+app.post("/seeduser", async (req, res) => {
   await userSeed.forEach((user) => {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
   });
@@ -87,7 +87,7 @@ app.get("/seeduser", async (req, res) => {
 // DELETE - Delete all users
 //======================
 
-app.get("/delete/:id", async (req, res) => {
+app.post("/delete/:id", async (req, res) => {
   if (req.params.id === "allurl") {
     await UrlModel.deleteMany();
     res.json(`All urls deleted successfuly!`);
