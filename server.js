@@ -61,7 +61,11 @@ const userSeed = require("./models/seed-users.js");
 //              ROUTES
 // =======================================
 
-// app.set("view engine", "ejs");
+//======================
+// VIEW - ejs
+//======================
+
+app.set("view engine", "ejs");
 
 //======================
 // CREATE - Seed data
