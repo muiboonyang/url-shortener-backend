@@ -63,12 +63,6 @@ const userSeed = require("./models/seed-users.js");
 // =======================================
 
 //======================
-// VIEW - ejs
-//======================
-
-// app.set("view engine", "ejs");
-
-//======================
 // READ - Redirect to full link when clicking on short link
 //======================
 
@@ -80,6 +74,21 @@ app.get("/:shortUrl", async (req, res) => {
   shortUrl.save();
 
   res.redirect(shortUrl.full);
+});
+
+//======================
+// UPDATE
+//======================
+
+app.post("/:shortUrl/update", async (req, res) => {
+  const longUrl = req.body.url;
+
+  await UserModel.findOneAndUpdate(
+    { short: req.params.shortUrl },
+    { full: longUrl }
+  );
+
+  res.json(`Profile updated successfully!`);
 });
 
 //======================

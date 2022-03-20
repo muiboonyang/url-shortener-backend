@@ -37,24 +37,8 @@ router.post("/shortUrls", async (req, res) => {
     username: req.body.username,
     full: req.body.url,
   });
-  res.redirect("/");
+  res.redirect("/urls/");
 });
-
-//======================
-// UPDATE
-//======================
-
-// router.post("/:username/update", async (req, res) => {
-//   const formInput = req.body;
-//   const password = req.body.password;
-//   const hashPassword = await bcrypt.hash(password, 12);
-
-//   await UserModel.findOneAndUpdate(
-//     { username: req.params.username },
-//     { ...formInput, password: hashPassword }
-//   );
-//   res.json(`Profile updated successfully!`);
-// });
 
 //======================
 // EXPORT
