@@ -39,6 +39,9 @@ app.use(
 //                CONTROLLERS
 // =======================================
 
+const userController = require("./controllers/users.js");
+app.use("/users", userController);
+
 const urlController = require("./controllers/urls.js");
 app.use("/urls", urlController);
 
