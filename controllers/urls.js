@@ -4,7 +4,7 @@
 
 const express = require("express");
 const router = express.Router();
-const UrlModel = require("../models/shortUrl");
+const UrlModel = require("../models/urls.js");
 
 //======================
 // ROUTES

@@ -66,7 +66,7 @@ const userSeed = require("./models/seed-users.js");
 // VIEW - ejs
 //======================
 
-app.set("view engine", "ejs");
+// app.set("view engine", "ejs");
 
 //======================
 // CREATE - Seed data
