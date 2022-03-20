@@ -69,6 +69,20 @@ const userSeed = require("./models/seed-users.js");
 // app.set("view engine", "ejs");
 
 //======================
+// READ - Get full link
+//======================
+
+app.get("/:shortUrl", async (req, res) => {
+  const shortUrl = await UrlModel.findOne({ short: req.params.shortUrl });
+  if (shortUrl === null) return res.sendStatus(404);
+
+  shortUrl.clicks++;
+  shortUrl.save();
+
+  res.redirect(shortUrl.full);
+});
+
+//======================
 // CREATE - Seed data
 //======================
 

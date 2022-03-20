@@ -14,16 +14,9 @@ const UrlModel = require("../models/urls.js");
 // READ - Get (all links)
 //=======================
 
-// router.get("/", async (req, res) => {
-//   const allUsers = await UserModel.find({});
-//   res.json(allUsers);
-// });
-
 router.get("/", async (req, res) => {
   const shortUrls = await UrlModel.find({});
   res.json(shortUrls);
-  //   const shortUrls = await UrlModel.find();
-  //   res.render("index", { shortUrls: shortUrls });
 });
 
 //======================
