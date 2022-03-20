@@ -41,7 +41,7 @@ router.get("/:username", async (req, res) => {
 
 router.get("/:shortUrl", async (req, res) => {
   const shortUrl = await UrlModel.findOne({ short: req.params.shortUrl });
-  if (shortUrl == null) return res.sendStatus(404);
+  if (shortUrl === null) return res.sendStatus(404);
 
   shortUrl.clicks++;
   shortUrl.save();
