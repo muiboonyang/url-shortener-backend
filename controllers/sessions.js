@@ -15,7 +15,7 @@ const UserModel = require("../models/users.js");
 // CREATE - Post - Create session (new log in)
 //=======================
 
-router.post("/new", async (req, res) => {
+router.post("/login", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
