@@ -27,13 +27,17 @@ router.get("/", async (req, res) => {
 });
 
 //======================
-// READ - Get specific link
+// READ - Get links of specific user
 //=======================
 
-// router.get("/:username", async (req, res) => {
-//   const foundUser = await UserModel.findOne({ username: req.params.username });
-//   res.json(foundUser);
-// });
+router.get("/:username", async (req, res) => {
+  const userUrl = await UrlModel.findOne({ username: req.params.username });
+  res.json(userUrl);
+});
+
+//======================
+// READ - Get specific link
+//=======================
 
 router.get("/:shortUrl", async (req, res) => {
   const shortUrl = await UrlModel.findOne({ short: req.params.shortUrl });
@@ -50,33 +54,12 @@ router.get("/:shortUrl", async (req, res) => {
 //=======================
 
 router.post("/shortUrls", async (req, res) => {
-  await UrlModel.create({ full: req.body.fullUrl });
-  res.redirect("/myurls");
+  await UrlModel.create({
+    username: req.body.username,
+    full: req.body.url,
+  });
+  //   res.redirect("/");
 });
-
-// router.post("/new", async (req, res) => {
-//   const formInput = req.body;
-//   const username = req.body.username;
-//   const password = req.body.password;
-
-//   const existingUsername = await UserModel.find({ username: username });
-//   //   console.log(existingUsername);
-
-//   if (existingUsername.length !== 0) {
-//     res
-//       .status(403)
-//       .json(
-//         `Username "${req.body.username}" already exists! Choose another username.`
-//       );
-//     return;
-//   } else {
-//     const hashPassword = await bcrypt.hash(password, 12);
-//     await UserModel.create({ ...formInput, password: hashPassword });
-//     res.json(
-//       `New user created! username: ${username} | password: ${password} | hash: ${hashPassword}`
-//     );
-//   }
-// });
 
 //======================
 // UPDATE

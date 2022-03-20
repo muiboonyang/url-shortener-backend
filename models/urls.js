@@ -3,6 +3,7 @@ const shortId = require("shortid");
 
 const UrlSchema = new mongoose.Schema(
   {
+    username: { type: String, required: true },
     full: {
       type: String,
       required: true,
