@@ -69,7 +69,7 @@ const userSeed = require("./models/seed-users.js");
 // app.set("view engine", "ejs");
 
 //======================
-// READ - Get full link
+// READ - Redirect to full link when clicking on short link
 //======================
 
 app.get("/:shortUrl", async (req, res) => {

@@ -29,20 +29,6 @@ router.get("/:username", async (req, res) => {
 });
 
 //======================
-// READ - Get specific link
-//=======================
-
-router.get("/:shortUrl", async (req, res) => {
-  const shortUrl = await UrlModel.findOne({ short: req.params.shortUrl });
-  if (shortUrl === null) return res.sendStatus(404);
-
-  shortUrl.clicks++;
-  shortUrl.save();
-
-  res.redirect(shortUrl.full);
-});
-
-//======================
 // CREATE - Post (new link using form input)
 //=======================
 
@@ -51,7 +37,7 @@ router.post("/shortUrls", async (req, res) => {
     username: req.body.username,
     full: req.body.url,
   });
-  //   res.redirect("/");
+  res.redirect("/");
 });
 
 //======================
