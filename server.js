@@ -15,11 +15,11 @@ const mongoURI = process.env.MONGO_URI;
 // const mongoURI = "mongodb://localhost:27017/urlshortener";
 connectDB(mongoURI);
 
-const app = express();
-
 // =======================================
 //                MIDDLEWARE
 // =======================================
+
+const app = express();
 
 // body parser middleware
 app.use(cors()); // overcomes cors issue
