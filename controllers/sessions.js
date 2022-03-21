@@ -35,7 +35,7 @@ router.post("/login", async (req, res) => {
       // res.json(
       //   `Login sucessful! username: ${username} | password: ${password} | hash: ${hash}`
       // );
-      res.json({ username });
+      res.json(loginDetails);
       return;
     } else {
       req.session.auth = false;

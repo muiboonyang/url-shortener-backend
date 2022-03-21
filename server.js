@@ -128,4 +128,6 @@ app.post("/delete/:id", async (req, res) => {
 //              LISTENER
 // =======================================
 
-app.listen(process.env.PORT || 5001);
+const server = app.listen(process.env.PORT || 5001);
+
+module.exports = server;
