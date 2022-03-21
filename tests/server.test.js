@@ -1,5 +1,4 @@
-//test.js
-
+//server.js
 const server = require("../server.js");
 const supertest = require("supertest");
 const requestWithSupertest = supertest(server);
@@ -9,7 +8,6 @@ describe("Short Urls", () => {
     const res = await requestWithSupertest.post("/seeduser");
     expect(res.status).toEqual(200);
     expect(res.type).toEqual(expect.stringContaining("json"));
-    expect(res.body).toHaveProperty("muiboonyang");
   });
 });
 
