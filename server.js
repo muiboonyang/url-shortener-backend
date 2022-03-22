@@ -83,12 +83,12 @@ app.get("/:shortUrl", async (req, res) => {
 app.post("/:shortUrl/update", async (req, res) => {
   const longUrl = req.body.url;
 
-  await UserModel.findOneAndUpdate(
+  await UrlModel.findOneAndUpdate(
     { short: req.params.shortUrl },
     { full: longUrl }
   );
 
-  res.json(`Profile updated successfully!`);
+  res.json(`Url updated successfully!`);
 });
 
 //======================
