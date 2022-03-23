@@ -1,5 +1,5 @@
 /////////////////////////////
-// clearDB
+// clearDB - work in progress
 /////////////////////////////
 // const db = require("./db");
 // beforeAll(async () => await db.connect());
@@ -21,8 +21,8 @@ describe("Seed Users", () => {
 });
 
 describe("Short Urls - Redirect", () => {
-  it("GET /:shortUrl should redirect users to long url", async () => {
-    const res = await requestWithSupertest.get("/nIHDdCael");
+  it("GET /:shortUrl should redirect users to long url (GovTech)", async () => {
+    const res = await requestWithSupertest.get("/Hpl5KtM3H");
     expect(res.status).toEqual(302);
     expect(res.redirect);
   });
