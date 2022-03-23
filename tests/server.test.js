@@ -1,10 +1,13 @@
+/////////////////////////////
 // clearDB
-const db = require("../models/db");
-beforeAll(async () => await db.connect());
-afterEach(async () => await db.clearDatabase());
-afterAll(async () => await db.closeDatabase());
+/////////////////////////////
+// const db = require("./db");
+// beforeAll(async () => await db.connect());
+// afterEach(async () => await db.clearDatabase());
+// afterAll(async () => await db.closeDatabase());
+/////////////////////////////
 
-//server.js
+// Test for server.js
 const server = require("../server.js");
 const supertest = require("supertest");
 const requestWithSupertest = supertest(server);
