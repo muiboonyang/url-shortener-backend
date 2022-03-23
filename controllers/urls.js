@@ -37,7 +37,10 @@ router.post("/shortUrls", async (req, res) => {
     username: req.body.username,
     full: req.body.url,
   });
-  res.json(`"${req.body.username}" has shortened a new url: ${req.body.url}.`);
+  res.status(200).json({
+    status: "ok",
+    message: `"${req.body.username}" has shortened a new url: ${req.body.url}.`,
+  });
 });
 
 //======================
