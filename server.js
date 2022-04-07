@@ -66,6 +66,10 @@ const userSeed = require("./models/seed-users.js");
 // READ - Redirect to full link when clicking on short link
 //======================
 
+app.get("/", async (req, res) => {
+  res.json("App is running");
+});
+
 app.get("/:shortUrl", async (req, res) => {
   const shortUrl = await UrlModel.findOne({ short: req.params.shortUrl });
   if (shortUrl === null) return res.sendStatus(404);
