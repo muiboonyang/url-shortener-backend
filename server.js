@@ -27,17 +27,6 @@ app.use(express.json()); // allows res.body to work (express.json lets you read 
 app.use(express.urlencoded({ extended: false })); // allows you to read what the forms send over (by default, it's all encoded), just declare it
 app.use(express.static("public")); // allow loading of static files in "public" directory
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-  );
-  next();
-});
-
 // session middleware
 app.use(
   session({
