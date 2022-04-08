@@ -6,8 +6,19 @@ const express = require("express");
 const router = express.Router();
 const UrlModel = require("../models/urls.js");
 
-const makeid = require("../models/util");
-const randomID = makeid(10);
+// const makeid = require("../models/util");
+// const randomID = makeid(10);
+
+function makeid(length) {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 //======================
 // ROUTES
@@ -39,7 +50,7 @@ router.post("/shortUrls", async (req, res) => {
   await UrlModel.create({
     username: req.body.username,
     full: req.body.url,
-    short: randomID,
+    short: makeid(10),
   });
   res.status(200).json({
     status: "ok",
