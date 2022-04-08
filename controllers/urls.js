@@ -6,6 +6,9 @@ const express = require("express");
 const router = express.Router();
 const UrlModel = require("../models/urls.js");
 
+const makeid = require("../models/util");
+const randomID = makeid(10);
+
 //======================
 // ROUTES
 //======================
@@ -36,6 +39,7 @@ router.post("/shortUrls", async (req, res) => {
   await UrlModel.create({
     username: req.body.username,
     full: req.body.url,
+    short: randomID,
   });
   res.status(200).json({
     status: "ok",
