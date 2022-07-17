@@ -43,7 +43,7 @@ router.post("/new", async (req, res) => {
 
   if (existingUsername.length !== 0) {
     res.status(403).json(
-      `Username already exists!`
+      `Email already exists!`
       // `Username "${req.body.username}" already exists! Choose another username.`
     );
     return;
@@ -52,7 +52,7 @@ router.post("/new", async (req, res) => {
     await UserModel.create({ ...formInput, password: hashPassword });
     res.json(
       `New user succesfully created!`
-      // `New user created! username: ${username} | password: ${password} | hash: ${hashPassword}`
+      // `New user created! Email: ${username} | password: ${password} | hash: ${hashPassword}`
     );
   }
 });
