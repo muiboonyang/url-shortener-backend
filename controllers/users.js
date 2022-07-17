@@ -42,17 +42,17 @@ router.post("/new", async (req, res) => {
   //   console.log(existingUsername);
 
   if (existingUsername.length !== 0) {
-    res
-      .status(403)
-      .json(
-        `Username "${req.body.username}" already exists! Choose another username.`
-      );
+    res.status(403).json(
+      `Username already exists!`
+      // `Username "${req.body.username}" already exists! Choose another username.`
+    );
     return;
   } else {
     const hashPassword = await bcrypt.hash(password, 12);
     await UserModel.create({ ...formInput, password: hashPassword });
     res.json(
-      `New user created! username: ${username} | password: ${password} | hash: ${hashPassword}`
+      `New user succesfully created!`
+      // `New user created! username: ${username} | password: ${password} | hash: ${hashPassword}`
     );
   }
 });
