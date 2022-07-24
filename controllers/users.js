@@ -42,18 +42,18 @@ router.post("/new", async (req, res) => {
   //   console.log(existingUsername);
 
   if (existingUsername.length !== 0) {
-    res.status(403).json(
-      `Email already exists!`
+    res.status(403).json({
+      message: `Email already exists!`,
       // `Username "${req.body.username}" already exists! Choose another username.`
-    );
+    });
     return;
   } else {
     const hashPassword = await bcrypt.hash(password, 12);
     await UserModel.create({ ...formInput, password: hashPassword });
-    res.json(
-      `New user succesfully created!`
+    res.json({
+      message: `New user succesfully created!`,
       // `New user created! Email: ${username} | password: ${password} | hash: ${hashPassword}`
-    );
+    });
   }
 });
 
@@ -70,7 +70,9 @@ router.post("/:username/update", async (req, res) => {
     { username: req.params.username },
     { ...formInput, password: hashPassword }
   );
-  res.json(`Profile updated successfully!`);
+  res.json({
+    message: `Profile updated successfully!`,
+  });
 });
 
 //======================

@@ -92,7 +92,9 @@ app.post("/:shortUrl/update", async (req, res) => {
     { full: longUrl }
   );
 
-  res.json(`Url updated successfully!`);
+  res.json({
+    message: `URL updated successfully!`,
+  });
 });
 
 //======================
@@ -117,15 +119,21 @@ app.post("/seeduser", async (req, res) => {
 app.post("/delete/:id", async (req, res) => {
   if (req.params.id === "allurl") {
     await UrlModel.deleteMany();
-    res.json(`All urls deleted successfuly!`);
+    res.json({
+      message: `All urls deleted successfuly!`,
+    });
     return;
   } else if (req.params.id === "alluser") {
     await UserModel.deleteMany();
-    res.json(`All users deleted successfuly!`);
+    res.json({
+      message: `All users deleted successfuly!`,
+    });
     return;
   }
   await UrlModel.deleteOne({ short: req.params.id });
-  res.json(`Url deleted successfully!`);
+  res.json({
+    message: `URL deleted successfully!`,
+  });
 });
 
 // =======================================

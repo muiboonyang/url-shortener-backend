@@ -32,10 +32,11 @@ router.post("/login", async (req, res) => {
     if (valid) {
       req.session.currentUser = loginDetails.username;
       req.session.auth = true;
-      // res.json(
-      //   `Login sucessful! username: ${username} | password: ${password} | hash: ${hash}`
-      // );
-      res.json({ username: loginDetails.username, name: loginDetails.name });
+      res.json({
+        username: loginDetails.username,
+        name: loginDetails.name,
+        message: `Login sucessful!`,
+      });
       return;
     } else {
       req.session.auth = false;
@@ -52,7 +53,9 @@ router.post("/login", async (req, res) => {
 
 router.get("/logout", (req, res) => {
   req.session.destroy();
-  res.json("Logged out successfully!");
+  res.json({
+    message: "Logged out successfully!",
+  });
 });
 
 //======================

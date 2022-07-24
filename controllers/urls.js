@@ -6,19 +6,16 @@ const express = require("express");
 const router = express.Router();
 const UrlModel = require("../models/urls.js");
 
-// const makeid = require("../models/util");
-// const randomID = makeid(10);
-
-function makeid(length) {
-  var result = "";
-  var characters =
+const generateId = (length) => {
+  let result = "";
+  let characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  var charactersLength = characters.length;
+  let charactersLength = characters.length;
   for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-}
+};
 
 //======================
 // ROUTES
@@ -47,15 +44,23 @@ router.get("/:username", async (req, res) => {
 //=======================
 
 router.post("/shortUrls", async (req, res) => {
-  await UrlModel.create({
-    username: req.body.username,
-    full: req.body.url,
-    short: makeid(10),
-  });
-  res.status(200).json({
-    status: "ok",
-    message: `"${req.body.username}" has shortened a new url: ${req.body.url}.`,
-  });
+  const shortId = generateId(10);
+  const existingShortId = await UrlModel.find({ short: shortId });
+
+  if (existingShortId.length !== 0) {
+    // Short URL exists
+    res.status(403).json(`Please try again!`);
+    return;
+  } else {
+    await UrlModel.create({
+      username: req.body.username,
+      full: req.body.url,
+      short: shortId,
+    });
+    res.status(200).json({
+      message: `"${req.body.username}" has shortened a new url: ${req.body.url}.`,
+    });
+  }
 });
 
 //======================
