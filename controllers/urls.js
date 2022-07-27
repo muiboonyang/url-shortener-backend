@@ -49,7 +49,9 @@ router.post("/shortUrls", async (req, res) => {
 
   if (existingShortId.length !== 0) {
     // Short URL exists
-    res.status(403).json(`Please try again!`);
+    res.status(403).json({
+      message: `Please try again!`,
+    });
     return;
   } else {
     await UrlModel.create({

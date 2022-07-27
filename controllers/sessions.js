@@ -22,7 +22,9 @@ router.post("/login", async (req, res) => {
   const checkUserExist = await UserModel.find({ username: username }); // no matter the number of documents matched, a cursor {} is returned, never null
 
   if (checkUserExist.length === 0) {
-    res.status(403).json(`The username "${username}" does not exist.`);
+    res.status(403).json({
+      message: `The username "${username}" does not exist.`,
+    });
     return;
   } else {
     const loginDetails = await UserModel.findOne({ username: username }); //  if query matches, first document is returned, otherwise null.
