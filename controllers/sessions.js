@@ -23,7 +23,8 @@ router.post("/login", async (req, res) => {
 
   if (checkUserExist.length === 0) {
     res.status(403).json({
-      message: `The username "${username}" does not exist.`,
+      message: `Username does not exist`,
+      // message: `The username "${username}" does not exist.`,
     });
     return;
   } else {
@@ -37,7 +38,7 @@ router.post("/login", async (req, res) => {
       res.json({
         username: loginDetails.username,
         name: loginDetails.name,
-        message: `Login sucessful!`,
+        message: `Login sucessful`,
       });
       return;
     } else {
